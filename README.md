@@ -44,7 +44,6 @@ Se executar localmente, o programa também gera `data/state.json` e `site/feed.x
 - Usa `documento` como identificador; mantém até 100 itens no RSS e até 10 mil identificadores conhecidos no estado.
 - Preserva publicações previamente encontradas mesmo quando deixam de aparecer na lista atual do portal.
 - Em caso de publicação nova ou alteração nos dados monitorados, atualiza o estado e publica um novo `feed.xml`.
-- O RSS aponta cada item para a página oficial do Diário; o formato observado não fornece um URL de PDF confirmado. O código não inventa um caminho para o arquivo.
 
 ## Limitações conhecidas
 
