@@ -1,0 +1,76 @@
+name: Atualizar RSS do Diário Oficial
+
+on:
+  schedule:
+    # Minutos 17 e 47: evita agendar no início de cada hora.
+    - cron: '17,47 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: diario-floresta-azul-pages
+  cancel-in-progress: false
+
+jobs:
+  atualizar-e-publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v7
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Instalar Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Testar gerador RSS
+        run: npm test
+
+      - name: Capturar JSON e atualizar feed
+        id: update
+        env:
+          PORTAL_URL: https://diario.florestaazul.ba.gov.br/edicoes-anteriores
+          EXPORT_BUTTON_TEXT: ${{ vars.EXPORT_BUTTON_TEXT }}
+          EXPORT_BUTTON_SELECTOR: ${{ vars.EXPORT_BUTTON_SELECTOR }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: npm run update
+
+      - name: Salvar estado no repositório
+        if: steps.update.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/state.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Atualiza estado do feed RSS"
+            git push
+          fi
+
+      - name: Configurar GitHub Pages
+        if: steps.update.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        uses: actions/configure-pages@v5
+
+      - name: Enviar arquivos do RSS para publicação
+        if: steps.update.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+
+      - name: Publicar no GitHub Pages
+        if: steps.update.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,14 @@
+{
+  "name": "diario-floresta-azul-rss",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Gera um feed RSS a partir das publicações do Diário Oficial de Floresta Azul.",
+  "type": "commonjs",
+  "scripts": {
+    "update": "node scripts/update-rss.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "playwright": "^1.55.0"
+  }
+}
