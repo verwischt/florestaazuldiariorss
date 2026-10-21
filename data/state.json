@@ -1,5 +1,6 @@
 {
   "knownDocumentIds": [
+    "1302",
     "1301",
     "1300",
     "1299",
@@ -12,6 +13,14 @@
     "1292"
   ],
   "items": [
+    {
+      "documento": "1302",
+      "envio": "2026-10-21T08:40:33",
+      "anoedicao": "20",
+      "arquivoa4": "2026_10_211302002651",
+      "observacao": "-DECRETO N. 051.2026 - NOMEIA LANY PARA O CARGO DE SECRETÁRIA MUNICIPAL DE ADMINISTRAÇÃO E FINANÇAS",
+      "title": "DECRETO N. 051.2026 - NOMEIA LANY PARA O CARGO DE SECRETÁRIA MUNICIPAL DE ADMINISTRAÇÃO E FINANÇAS"
+    },
     {
       "documento": "1301",
       "envio": "2026-10-20T17:27:30",
@@ -93,5 +102,5 @@
       "title": "DECRETO N. 044.2026 REPUBLICAÇÃO POR INCORREÇÃO - INSTITUI E REGULAMENTA O FUNCIONAMENTO DO CENTRO DE ATENDIMENTO EDUCACIONAL ESPECIALIZADO DE FLORESTA AZUL – CAEE"
     }
   ],
-  "lastChangedAt": "2026-10-20T21:42:28.744Z"
+  "lastChangedAt": "2026-10-21T15:23:09.469Z"
 }
