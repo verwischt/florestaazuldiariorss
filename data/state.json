@@ -1,5 +1,6 @@
 {
   "knownDocumentIds": [
+    "1307",
     "1306",
     "1305",
     "1304",
@@ -17,6 +18,14 @@
     "1292"
   ],
   "items": [
+    {
+      "documento": "1307",
+      "envio": "2026-10-28T14:40:02",
+      "anoedicao": "20",
+      "arquivoa4": "2026_10_281307002651",
+      "observacao": "-RATIFICAÇÃO DO PREFEITO AUTORIZAÇÃO DA AUTORIDADE COMPETENTE - DISPENSA Nº.63/2026",
+      "title": "RATIFICAÇÃO DO PREFEITO AUTORIZAÇÃO DA AUTORIDADE COMPETENTE - DISPENSA Nº.63/2026"
+    },
     {
       "documento": "1306",
       "envio": "2026-10-26T16:26:55",
@@ -138,5 +147,5 @@
       "title": "DECRETO N. 044.2026 REPUBLICAÇÃO POR INCORREÇÃO - INSTITUI E REGULAMENTA O FUNCIONAMENTO DO CENTRO DE ATENDIMENTO EDUCACIONAL ESPECIALIZADO DE FLORESTA AZUL – CAEE"
     }
   ],
-  "lastChangedAt": "2026-10-27T00:08:14.032Z"
+  "lastChangedAt": "2026-10-28T18:54:39.007Z"
 }
