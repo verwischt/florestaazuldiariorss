@@ -5,10 +5,12 @@ const path = require('node:path');
 const { chromium } = require('playwright');
 const {
   PORTAL_URL,
+  getPdfUrl,
   normalizeRecord,
   compareRecords,
   buildRss
 } = require('../lib/rss');
+const { summarizePdf } = require('../lib/summarizer');
 
 const ROOT = path.resolve(__dirname, '..');
 const SITE_DIR = path.join(ROOT, 'site');
@@ -167,8 +169,43 @@ async function readState() {
 }
 
 function sameRecord(a, b) {
-  return ['documento', 'envio', 'anoedicao', 'arquivoa4', 'observacao', 'title']
+  return ['documento', 'envio', 'anoedicao', 'arquivoa4', 'observacao', 'title', 'resumo']
     .every((key) => String(a?.[key] ?? '') === String(b?.[key] ?? ''));
+}
+
+async function applySummaries(items, options = {}) {
+  const apiKey = options.apiKey || process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    return 0;
+  }
+
+  const maxPerRun = options.maxPerRun ?? Number.parseInt(process.env.MAX_SUMMARIES_PER_RUN || '3', 10);
+  let count = 0;
+
+  for (const record of items) {
+    if (count >= maxPerRun) break;
+    if (!record.resumo) {
+      const pdfUrl = getPdfUrl(record.arquivoa4);
+      if (pdfUrl) {
+        console.log(`[IA] Solicitando resumo para publicação ${record.documento}...`);
+        try {
+          const resumo = await summarizePdf(pdfUrl, {
+            apiKey,
+            model: options.model
+          });
+          if (resumo) {
+            record.resumo = resumo;
+            count++;
+            console.log(`[IA] Resumo gerado para publicação ${record.documento}.`);
+          }
+        } catch (err) {
+          console.warn(`[IA] Falha ao resumir publicação ${record.documento}: ${err.message}`);
+        }
+      }
+    }
+  }
+
+  return count;
 }
 
 async function writeOutput(file, content) {
@@ -179,6 +216,12 @@ async function writeOutput(file, content) {
 async function main() {
   if (process.argv.includes('--rebuild')) {
     const oldState = await readState();
+    if (process.argv.includes('--summarize')) {
+      const count = await applySummaries(oldState.items);
+      if (count > 0) {
+        await writeOutput(STATE_PATH, `${JSON.stringify(oldState, null, 2)}\n`);
+      }
+    }
     const siteBase = getSiteBaseUrl();
     const feedUrl = siteBase ? `${siteBase}feed.xml` : '';
     const rss = buildRss(oldState.items, {
@@ -206,6 +249,9 @@ async function main() {
   for (const record of current) {
     const id = String(record.documento);
     const oldRecord = oldItems.get(id);
+    if (oldRecord?.resumo && !record.resumo) {
+      record.resumo = oldRecord.resumo;
+    }
     if (!knownSet.has(id) || (oldRecord && !sameRecord(oldRecord, record))) changed = true;
   }
 
@@ -213,6 +259,11 @@ async function main() {
   for (const record of current) mergedMap.set(String(record.documento), record);
   const mergedItems = [...mergedMap.values()].sort(compareRecords).slice(0, MAX_FEED_ITEMS);
   const knownDocumentIds = [...new Set([...current.map((item) => String(item.documento)), ...oldState.knownDocumentIds])].slice(0, 10000);
+
+  const summariesGenerated = await applySummaries(mergedItems);
+  if (summariesGenerated > 0) {
+    changed = true;
+  }
 
   const now = new Date().toISOString();
   const lastChangedAt = changed ? now : (oldState.lastChangedAt || now);

@@ -53,6 +53,8 @@ jobs:
           EXPORT_BUTTON_TEXT: ${{ vars.EXPORT_BUTTON_TEXT }}
           EXPORT_BUTTON_SELECTOR: ${{ vars.EXPORT_BUTTON_SELECTOR }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          MAX_SUMMARIES_PER_RUN: ${{ vars.MAX_SUMMARIES_PER_RUN || '3' }}
         run: npm run update
 
       - name: Salvar estado no repositório

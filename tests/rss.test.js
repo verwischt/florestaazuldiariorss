@@ -21,17 +21,30 @@ test('remove tags and normalize line breaks in observation', () => {
   assert.equal(stripHtml('-DECRETO Nº 1<br />-PORTARIA Nº 2<br />'), '-DECRETO Nº 1\n-PORTARIA Nº 2');
 });
 
-test('normalizes a publication from the portal JSON', () => {
+test('normalizes a publication and preserves resumo', () => {
   const result = normalizeRecord({
     documento: 1295,
     envio: '2026-10-19T16:52:41',
     anoedicao: '20',
     arquivoa4: '2026_10_191295002651',
-    observacao: '-DECRETO N. 048.2026 - Dispõe sobre expediente.<br />'
+    observacao: '-DECRETO N. 048.2026 - Dispõe sobre expediente.<br />',
+    resumo: '- Decreto estabelece horário especial de trabalho.'
   });
   assert.equal(result.documento, '1295');
-  assert.equal(result.title, 'DECRETO N. 048.2026 - Dispõe sobre expediente.');
-  assert.equal(result.observacao, '-DECRETO N. 048.2026 - Dispõe sobre expediente.');
+  assert.equal(result.resumo, '- Decreto estabelece horário especial de trabalho.');
+});
+
+test('buildRss includes AI summary when available', () => {
+  const record = normalizeRecord({
+    documento: 1295,
+    envio: '2026-10-19T16:52:41',
+    arquivoa4: '2026_10_191295002651',
+    observacao: 'Edição teste',
+    resumo: '- Ato 1: Nomeação\n- Ato 2: Contrato de R$ 50.000'
+  });
+  const xml = buildRss([record]);
+  assert.match(xml, /<strong>📝 Resumo da Edição \(IA\):<\/strong>/);
+  assert.match(xml, /- Ato 1: Nomeação<br>- Ato 2: Contrato de R\$ 50\.000/);
 });
 
 test('sorts newest publications first', () => {

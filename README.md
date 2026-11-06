@@ -1,57 +1,131 @@
-# Diário Oficial de Floresta Azul — RSS
+# Diário Oficial de Floresta Azul — Feed RSS com IA 🗞️
 
-Projeto Node.js que abre o portal com Playwright, aciona a exportação JSON baseada em Blob, mantém os identificadores de publicação e gera um feed RSS 2.0 para publicar pelo GitHub Pages.
+[![Atualizar RSS do Diário Oficial](https://github.com/verwischt/florestaazuldiariorss/actions/workflows/atualizar-rss.yml/badge.svg)](https://github.com/verwischt/florestaazuldiariorss/actions/workflows/atualizar-rss.yml)
+[![Feed RSS](https://img.shields.io/badge/RSS-feed.xml-orange?logo=rss)](https://verwischt.github.io/florestaazuldiariorss/feed.xml)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Online-brightgreen)](https://verwischt.github.io/florestaazuldiariorss/)
+[![Node.js](https://img.shields.io/badge/Node.js-%3E%3D20-blue?logo=node.js)](package.json)
 
-## Como publicar
+Feed RSS automatizado e independente das publicações do **Diário Oficial do Município de Floresta Azul (Bahia)**.
 
-1. Crie um repositório público no GitHub, por exemplo `diario-floresta-azul`.
-2. Envie todos os arquivos deste projeto para a branch padrão (`main`).
-3. No repositório, entre em **Settings → Pages** e selecione **GitHub Actions** como fonte de publicação.
-4. Entre em **Settings → Secrets and variables → Actions → Variables** e, se necessário, crie `EXPORT_BUTTON_TEXT` com o texto visível no botão que exporta o JSON. Se for mais fácil selecionar por CSS, crie `EXPORT_BUTTON_SELECTOR` com um seletor CSS único. Quando `EXPORT_BUTTON_SELECTOR` estiver definido, ele tem prioridade.
-5. Abra **Actions → Atualizar RSS do Diário Oficial → Run workflow** para executar o primeiro teste.
-6. Inspecione os logs se o botão não for localizado. A mensagem de erro lista botões e links visíveis; use esse texto para definir a variável `EXPORT_BUTTON_TEXT` ou `EXPORT_BUTTON_SELECTOR`.
-7. Quando o workflow publicar com sucesso, o feed estará em `https://SEU_USUARIO.github.io/diario-floresta-azul/feed.xml` (ajuste usuário e repositório conforme os nomes reais).
+O projeto monitora o portal oficial, extrai novas edições, disponibiliza **links diretos para download do PDF** e gera **resumos inteligentes com Inteligência Artificial (Google Gemini)** direto no seu leitor de RSS favorito — tudo 100% gratuito rodando no GitHub Actions e GitHub Pages.
 
-## Execução local
+---
 
-Requer Node.js 20 ou 22.
+## 📡 Como Assinar o Feed
+
+Adicione o link abaixo ao seu leitor de RSS preferido (NetNewsWire, Feedly, Inoreader, Telegram bot, etc.):
+
+```text
+https://verwischt.github.io/florestaazuldiariorss/feed.xml
+```
+
+Você também pode acessar a página inicial do projeto:
+👉 [https://verwischt.github.io/florestaazuldiariorss/](https://verwischt.github.io/florestaazuldiariorss/)
+
+---
+
+## ✨ Recursos
+
+- **🔗 Links funcionais de PDF:** Cada item do feed possui link direto e tag `<enclosure>` para download ou abertura imediata do arquivo PDF.
+- **🤖 Resumos automáticos com IA:** Leitura e sumarização das edições usando o modelo **Gemini 1.5 Flash** (destaca decretos, licitações, contratos com valores, nomeações e portarias).
+- **⏱️ Monitoramento automático:** Execução periódica a cada 30 minutos via **GitHub Actions** (sem custos de servidor).
+- **💾 Cache persistente:** Histórico mantido em `data/state.json`, garantindo que edições antigas não se percam e nenhum PDF seja resumido mais de uma vez.
+- **🌐 Publicação automática:** Publicado diretamente no **GitHub Pages** sempre que houver novidades.
+
+---
+
+## 🤖 Como ativar os Resumos com IA (100% Gratuito)
+
+O resumo automático dos PDFs é opcional e utiliza a cota gratuita do **Google Gemini** (sem necessidade de cadastrar cartão de crédito).
+
+### Passo a passo para configurar:
+
+1. **Obtenha a chave gratuita:**
+   - Acesse o [Google AI Studio](https://aistudio.google.com/).
+   - Faça login com sua conta Google e clique em **Get API key**.
+   - Crie uma chave e copie o código gerado.
+
+2. **Adicione o Secret no GitHub:**
+   - No repositório, vá em **Settings** → **Secrets and variables** → **Actions**.
+   - Na aba **Secrets**, clique em **New repository secret**.
+   - **Name:** `GEMINI_API_KEY`
+   - **Secret:** *(cole a chave obtida no passo 1)*
+   - Clique em **Add secret**.
+
+3. **Pronto!**
+   - A cada nova edição capturada, a IA lerá o PDF e incluirá um bloco `📝 Resumo da Edição (IA)` diretamente na descrição da publicação no feed.
+   - O resumo é armazenado em cache no `data/state.json`, consumindo cota apenas uma vez por documento.
+   - *Se a chave não estiver configurada, o feed continuará funcionando normalmente com as informações padrão do portal.*
+
+---
+
+## 💻 Execução e Desenvolvimento Local
+
+Requer **Node.js 20, 22 ou superior**.
+
+### 1. Instalar dependências e navegadores do Playwright:
 
 ```bash
 npm install
 npx playwright install chromium
+```
+
+### 2. Rodar os testes:
+
+```bash
 npm test
+```
+
+### 3. Reconstruir o feed local a partir do estado atual:
+
+```bash
+npm run build
+```
+
+### 4. Executar a captura completa no portal oficial:
+
+```bash
 npm run update
 ```
 
-Para listar os botões e links visíveis no portal:
+### Comandos úteis de depuração:
 
-```bash
-node scripts/update-rss.js --list-controls
+- Listar controles e botões visíveis no portal:
+  ```bash
+  node scripts/update-rss.js --list-controls
+  ```
+- Executar e exibir o primeiro registro capturado:
+  ```bash
+  node scripts/update-rss.js --debug
+  ```
+
+---
+
+## 📂 Estrutura do Projeto
+
+```text
+├── .github/workflows/
+│   └── atualizar-rss.yml  # Automação do GitHub Actions (cron a cada 30 min)
+├── data/
+│   └── state.json         # Histórico de IDs conhecidos e publicações (com cache de IA)
+├── lib/
+│   ├── rss.js             # Lógica de formatação do feed RSS 2.0 e links de PDF
+│   └── summarizer.js      # Integração com a API do Google Gemini para leitura de PDFs
+├── scripts/
+│   └── update-rss.js      # Script de scraping (Playwright), extração de Blob e atualização
+├── site/
+│   ├── feed.xml           # Arquivo do feed RSS gerado e publicado
+│   └── index.html         # Página estática informativa para o GitHub Pages
+└── tests/
+    ├── rss.test.js        # Testes de geração e escape de XML
+    └── summarizer.test.js # Testes do módulo de IA
 ```
 
-Para capturar e mostrar o primeiro registro após atualizar:
+---
 
-```bash
-node scripts/update-rss.js --debug
-```
+## ⚠️ Isenção de Responsabilidade
 
-Se executar localmente, o programa também gera `data/state.json` e `site/feed.xml`.
+Este projeto é uma iniciativa comunitária independente e de código aberto, sem vínculo oficial com a Prefeitura Municipal de Floresta Azul.
 
-## Como funciona
-
-- Captura Blobs JSON criados por `URL.createObjectURL()` no contexto principal da página.
-- Tenta localizar um botão por `EXPORT_BUTTON_TEXT` ou pelos termos `json`, `exportar`, `baixar` e `download`.
-- Usa `documento` como identificador; mantém até 100 itens no RSS e até 10 mil identificadores conhecidos no estado.
-- Preserva publicações previamente encontradas mesmo quando deixam de aparecer na lista atual do portal.
-- Em caso de publicação nova ou alteração nos dados monitorados, atualiza o estado e publica um novo `feed.xml`.
-
-## Limitações conhecidas
-
-- A captura do Blob ainda precisa ser validada contra a interface ao vivo do portal. Se o site mudar o texto do botão ou deixar de usar `URL.createObjectURL()`, ajuste o seletor ou a captura.
-- O agendamento do GitHub Actions pode sofrer atrasos. Os horários do cron estão em UTC; executar nos minutos 17 e 47 reduz a chance de atraso associada a horários cheios.
-- No GitHub Free, o Pages requer que o repositório seja público. Os executores padrão do Actions são gratuitos para repositórios públicos. Consulte a documentação oficial antes de alterar a visibilidade:
-  - https://docs.github.com/pt/pages/getting-started-with-github-pages/creating-a-github-pages-site
-  - https://docs.github.com/pt/actions/reference/workflows-and-actions/workflow-syntax
-  - https://docs.github.com/pt/actions/concepts/billing-and-usage
-
-O feed é um serviço independente, não oficial da Prefeitura de Floresta Azul.
+Para efeitos legais e consultas oficiais, consulte sempre o portal oficial do município:  
+🔗 [https://diario.florestaazul.ba.gov.br/edicoes-anteriores](https://diario.florestaazul.ba.gov.br/edicoes-anteriores)
