@@ -28,7 +28,7 @@ Você também pode acessar a página inicial do projeto:
 
 - **🔗 Links funcionais de PDF:** Cada item do feed possui link direto e tag `<enclosure>` para download ou abertura imediata do arquivo PDF.
 - **🤖 Resumos automáticos com IA:** Leitura e sumarização das edições usando o modelo **Gemini 1.5 Flash** (destaca decretos, licitações, contratos com valores, nomeações e portarias).
-- **⏱️ Monitoramento automático:** Execução periódica a cada 30 minutos via **GitHub Actions** (sem custos de servidor).
+- **⏱️ Monitoramento automático:** Execução de segunda a sexta, das 07h às 19h (a cada 30 min) via **GitHub Actions** (sem custos de servidor).
 - **💾 Cache persistente:** Histórico mantido em `data/state.json`, garantindo que edições antigas não se percam e nenhum PDF seja resumido mais de uma vez.
 - **🌐 Publicação automática:** Publicado diretamente no **GitHub Pages** sempre que houver novidades.
 
@@ -105,7 +105,7 @@ npm run update
 
 ```text
 ├── .github/workflows/
-│   └── atualizar-rss.yml  # Automação do GitHub Actions (cron a cada 30 min)
+│   └── atualizar-rss.yml  # Automação do GitHub Actions (segunda a sexta, 07h às 19h, a cada 30 min)
 ├── data/
 │   └── state.json         # Histórico de IDs conhecidos e publicações (com cache de IA)
 ├── lib/

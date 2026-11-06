@@ -2,8 +2,9 @@ name: Atualizar RSS do Diário Oficial
 
 on:
   schedule:
-    # Minutos 17 e 47: evita agendar no início de cada hora.
-    - cron: '17,47 * * * *'
+    # Segunda a Sexta, das 07h às 19h (horário de Brasília / UTC-3 -> 10h às 22h UTC).
+    # Minutos 17 e 47 (a cada 30 min): evita filas de pico (:00 e :30) no GitHub Actions.
+    - cron: '17,47 10-22 * * 1-5'
   workflow_dispatch:
   push:
     branches:
