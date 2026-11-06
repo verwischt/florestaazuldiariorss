@@ -53,6 +53,7 @@ test('produces a valid-looking RSS channel and escapes XML', () => {
   assert.match(xml, /<guid isPermaLink="false">floresta-azul-documento-1<\/guid>/);
   assert.match(xml, /<link>https:\/\/diof\.io\.org\.br\/api\/diario-oficial\/download\/2026_10_201296002651\.pdf<\/link>/);
   assert.match(xml, /<enclosure url="https:\/\/diof\.io\.org\.br\/api\/diario-oficial\/download\/2026_10_201296002651\.pdf" length="0" type="application\/pdf"\/>/);
-  assert.match(xml, /Link do PDF: https:\/\/diof\.io\.org\.br\/api\/diario-oficial\/download\/2026_10_201296002651\.pdf/);
+  assert.match(xml, /Link do PDF: <a href="https:\/\/diof\.io\.org\.br\/api\/diario-oficial\/download\/2026_10_201296002651\.pdf">Clique aqui para abrir o PDF<\/a>/);
+  assert.match(xml, /<description><!\[CDATA\[/);
   assert.match(xml, /rel="self"/);
 });

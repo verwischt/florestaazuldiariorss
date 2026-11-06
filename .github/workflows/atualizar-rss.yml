@@ -5,6 +5,12 @@ on:
     # Minutos 17 e 47: evita agendar no início de cada hora.
     - cron: '17,47 * * * *'
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'data/**'
+      - 'site/feed.xml'
 
 permissions:
   contents: write
@@ -54,23 +60,23 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/state.json
+          git add data/state.json site/feed.xml
           if ! git diff --cached --quiet; then
             git commit -m "Atualiza estado do feed RSS"
             git push
           fi
 
       - name: Configurar GitHub Pages
-        if: steps.update.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        if: steps.update.outputs.changed == 'true' || github.event_name == 'workflow_dispatch' || github.event_name == 'push'
         uses: actions/configure-pages@v5
 
       - name: Enviar arquivos do RSS para publicação
-        if: steps.update.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        if: steps.update.outputs.changed == 'true' || github.event_name == 'workflow_dispatch' || github.event_name == 'push'
         uses: actions/upload-pages-artifact@v4
         with:
           path: site
 
       - name: Publicar no GitHub Pages
-        if: steps.update.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        if: steps.update.outputs.changed == 'true' || github.event_name == 'workflow_dispatch' || github.event_name == 'push'
         id: deployment
         uses: actions/deploy-pages@v4

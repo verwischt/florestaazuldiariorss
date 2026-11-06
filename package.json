@@ -5,6 +5,7 @@
   "description": "Gera um feed RSS a partir das publicações do Diário Oficial de Floresta Azul.",
   "type": "commonjs",
   "scripts": {
+    "build": "node scripts/update-rss.js --rebuild",
     "update": "node scripts/update-rss.js",
     "test": "node --test"
   },

@@ -19,7 +19,7 @@ const MAX_FEED_ITEMS = Number.parseInt(process.env.MAX_FEED_ITEMS || '100', 10);
 function getSiteBaseUrl() {
   const configured = process.env.SITE_BASE_URL;
   if (configured) return configured.endsWith('/') ? configured : `${configured}/`;
-  const repo = process.env.GITHUB_REPOSITORY || '';
+  const repo = process.env.GITHUB_REPOSITORY || 'verwischt/florestaazuldiariorss';
   const [owner, name] = repo.split('/');
   if (!owner || !name) return '';
   if (name.toLowerCase() === `${owner}.github.io`.toLowerCase()) {
@@ -177,6 +177,20 @@ async function writeOutput(file, content) {
 }
 
 async function main() {
+  if (process.argv.includes('--rebuild')) {
+    const oldState = await readState();
+    const siteBase = getSiteBaseUrl();
+    const feedUrl = siteBase ? `${siteBase}feed.xml` : '';
+    const rss = buildRss(oldState.items, {
+      portalUrl: PORTAL,
+      feedUrl,
+      lastBuildDate: oldState.lastChangedAt || new Date().toISOString()
+    });
+    await writeOutput(path.join(SITE_DIR, 'feed.xml'), rss);
+    console.log(`Feed reconstruído em site/feed.xml com ${oldState.items.length} publicações.`);
+    return;
+  }
+
   const rawRecords = await loadJsonFromPortal();
   if (rawRecords === null) return;
   if (!Array.isArray(rawRecords)) throw new Error('O JSON extraído não é uma lista.');
