@@ -1,5 +1,6 @@
 {
   "knownDocumentIds": [
+    "1315",
     "1314",
     "1313",
     "1312",
@@ -26,12 +27,22 @@
   ],
   "items": [
     {
+      "documento": "1315",
+      "envio": "2026-11-12T14:31:22",
+      "anoedicao": "20",
+      "arquivoa4": "2026_11_121315002651",
+      "observacao": "-RATIFICAÇÃO DO PREFEITO AUTORIZAÇÃO DA AUTORIDADE COMPETENTE DISPENSA Nº.65/2026",
+      "title": "RATIFICAÇÃO DO PREFEITO AUTORIZAÇÃO DA AUTORIDADE COMPETENTE DISPENSA Nº.65/2026",
+      "resumo": ""
+    },
+    {
       "documento": "1314",
       "envio": "2026-11-06T13:55:09",
       "anoedicao": "20",
       "arquivoa4": "2026_11_061314002651",
       "observacao": "-EXTRATO DO CONTRATO nº. 257/2026\n-EXTRATO DO CONTRATO nº. 258/2026\n-EXTRATO DO CONTRATO nº. 259/2026\n-EXTRATO DO CONTRATO nº. 260/2026\n-EXTRATO DO CONTRATO nº. 261 /2026\n-EXTRATO DO CONTRATO nº. 262/2026\n-EXTRATO DO CONTRATO nº. 263/2026\n-EXTRATO DO CONTRATO nº. 264/2026\n-EXTRATO DO CONTRATO nº. 265/2026\n-EXTRATO DO CONTRATO nº. 267/2026\n-EXTRATO DO CONTRATO nº. 268/2026\n-EXTRATO DO CONTRATO nº. 269/2026\n-EXTRATO DO CONTRATO nº. 270/2026\n-EXTRATO DO CONTRATO nº. 271 /2026\n-EXTRATO DO CONTRATO nº. 272/2026\n-EXTRATO DO CONTRATO nº. 273/2026\n-EXTRATO DO CONTRATO nº. 274/2026\n-EXTRATO DO CONTRATO nº. 275/2026\n-EXTRATO DO CONTRATO nº. 276/2026\n-EXTRATO DO CONTRATO nº. 277/2026\n-EXTRATO DO CONTRATO nº. 278/2026\n-EXTRATO DO CONTRATO nº. 279/2026",
-      "title": "EXTRATO DO CONTRATO nº. 257/2026"
+      "title": "EXTRATO DO CONTRATO nº. 257/2026",
+      "resumo": ""
     },
     {
       "documento": "1313",
@@ -39,7 +50,8 @@
       "anoedicao": "20",
       "arquivoa4": "2026_11_061313002651",
       "observacao": "-PORTARIA 0011.2026 - DISPÕE SOBRE A CONCESSÃO DE BOLSA DE INCENTIVO AO ESTUDO PARA FORMAÇÃO DE PROFESSORES, GESTORES E COORDENADORES DOS ANOS INICIAIS DA REDE MUNICIPAL DE ENSINO.",
-      "title": "PORTARIA 0011.2026 - DISPÕE SOBRE A CONCESSÃO DE BOLSA DE INCENTIVO AO ESTUDO PARA FORMAÇÃO DE PROFESSORES, GESTORES E COORDENADORES DOS ANOS INICIAIS DA REDE MUNICIPAL DE ENSINO."
+      "title": "PORTARIA 0011.2026 - DISPÕE SOBRE A CONCESSÃO DE BOLSA DE INCENTIVO AO ESTUDO PARA FORMAÇÃO DE PROFESSORES, GESTORES E COORDENADORES DOS ANOS INICIAIS DA REDE MUNICIPAL DE ENSINO.",
+      "resumo": ""
     },
     {
       "documento": "1312",
@@ -47,7 +59,8 @@
       "anoedicao": "20",
       "arquivoa4": "2026_11_051312002651",
       "observacao": "-AVISO DE CREDENCIAMENTO Nº. 006/2026 - Credenciamento de pessoas físicas e/ou jurídicas para a prestação de serviços médicos de Clínico Geral Plantonista e Clínico Geral para atendimento na Atenção Primária à Saúde e nos serviços de Saúde da Família, com o objetivo de atender às necessidades assistenciais da Secretaria Municipal de Saúde do Município de Floresta Azul/BA.",
-      "title": "AVISO DE CREDENCIAMENTO Nº. 006/2026 - Credenciamento de pessoas físicas e/ou jurídicas para a prestação de serviços médicos de Clínico Geral Plantonista e Clínico Geral para atendimento na Atenção Primária à Saúde e nos"
+      "title": "AVISO DE CREDENCIAMENTO Nº. 006/2026 - Credenciamento de pessoas físicas e/ou jurídicas para a prestação de serviços médicos de Clínico Geral Plantonista e Clínico Geral para atendimento na Atenção Primária à Saúde e nos",
+      "resumo": ""
     },
     {
       "documento": "1311",
@@ -55,7 +68,8 @@
       "anoedicao": "20",
       "arquivoa4": "2026_11_041311002651",
       "observacao": "-AVISO DE RETIFICAÇÃO - RESOLVE RETIFICAR A DATA DA SESSÃO DA DISPENSA 066/2026, PROCESSO ADMINISTRATIVO 096/2026, PUBLICADO NO DIÁRIO OFICIAL DIA 03 DE NOVEMBRO DE 2026, EDIÇÃO 1309.\n-AVISO DE DISPENSA Nº 67/2026 PROCESSO ADMINISTRATIVO Nº 97/2026 - PRESTAÇÃO DE SERVIÇOS ESPECIALIZADOS DE ASSESSORIA, INCLUSÃO E GERENCIAMENTO DAS INFORMAÇÕES E ENVIOS DOS EVENTOS DO E-SOCIAL (PROJETO DO GOVERNO FEDERAL QUE BUSCA DIGITALIZAR E UNIFICAR O ENVIO DAS INFORMAÇÕES FISCAIS, PREVIDENCIÁRIAS E TRABALHISTAS DAS ENTIDADES), A FIM DE ATENDER AS NECESSIDADES DESTE MUNICÍPIO DE FLORESTA AZUL/BA.",
-      "title": "AVISO DE RETIFICAÇÃO - RESOLVE RETIFICAR A DATA DA SESSÃO DA DISPENSA 066/2026, PROCESSO ADMINISTRATIVO 096/2026, PUBLICADO NO DIÁRIO OFICIAL DIA 03 DE NOVEMBRO DE 2026, EDIÇÃO 1309."
+      "title": "AVISO DE RETIFICAÇÃO - RESOLVE RETIFICAR A DATA DA SESSÃO DA DISPENSA 066/2026, PROCESSO ADMINISTRATIVO 096/2026, PUBLICADO NO DIÁRIO OFICIAL DIA 03 DE NOVEMBRO DE 2026, EDIÇÃO 1309.",
+      "resumo": ""
     },
     {
       "documento": "1310",
@@ -210,5 +224,5 @@
       "title": "DECRETO N. 044.2026 REPUBLICAÇÃO POR INCORREÇÃO - INSTITUI E REGULAMENTA O FUNCIONAMENTO DO CENTRO DE ATENDIMENTO EDUCACIONAL ESPECIALIZADO DE FLORESTA AZUL – CAEE"
     }
   ],
-  "lastChangedAt": "2026-11-06T18:32:05.171Z"
+  "lastChangedAt": "2026-11-12T18:24:43.841Z"
 }
