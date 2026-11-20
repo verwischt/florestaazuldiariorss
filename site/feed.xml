@@ -5,8 +5,16 @@
     <link>https://diario.florestaazul.ba.gov.br/edicoes-anteriores</link>
     <description>Publicações recentes do Diário Oficial de Floresta Azul, Bahia.</description>
     <language>pt-br</language>
-    <lastBuildDate>Thu, 19 Nov 2026 19:03:19 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 20 Nov 2026 01:21:10 GMT</lastBuildDate>
     <atom:link href="https://verwischt.github.io/florestaazuldiariorss/feed.xml" rel="self" type="application/rss+xml" xmlns:atom="http://www.w3.org/2005/Atom"/>
+    <item>
+      <title>RELATÓRIO RESUMIDO DA EXECUÇÃO ORÇAMENTÁRIA 5º BIMESTRE 2026.</title>
+      <link>https://diof.io.org.br/api/diario-oficial/download/2026_11_191319002651.pdf</link>
+      <guid isPermaLink="false">floresta-azul-documento-1319</guid>
+      <pubDate>Thu, 19 Nov 2026 22:00:52 GMT</pubDate>
+      <description><![CDATA[-RELATÓRIO RESUMIDO DA EXECUÇÃO ORÇAMENTÁRIA 5º BIMESTRE 2026.<br><br>Link do PDF: <a href="https://diof.io.org.br/api/diario-oficial/download/2026_11_191319002651.pdf">Clique aqui para abrir o PDF</a><br><br>Data de envio: 2026-11-19T19:00:52<br><br>Identificador da publicação: 1319<br><br>Edição/ano informado pelo portal: 20<br><br>Identificador de arquivo informado pelo portal: 2026_11_191319002651]]></description>
+      <enclosure url="https://diof.io.org.br/api/diario-oficial/download/2026_11_191319002651.pdf" length="0" type="application/pdf"/>
+    </item>
     <item>
       <title>DECRETO Nº 0000020/2026, 01 DE OUTUBRO DE 2026 ABRE CRÉDITO SUPLEMENTAR NO VALOR TOTAL DE: R$ 2.633.000,00 (DOIS MILHÕES SEISCENTOS E TRINTA E TRÊS MIL REAIS), PARA OS FINS QUE SE ESPECIFICA E DA OUTRAS PROVIDÊNCIAS.</title>
       <link>https://diof.io.org.br/api/diario-oficial/download/2026_11_191318002651.pdf</link>

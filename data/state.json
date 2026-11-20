@@ -1,5 +1,6 @@
 {
   "knownDocumentIds": [
+    "1319",
     "1318",
     "1317",
     "1316",
@@ -29,6 +30,15 @@
     "1292"
   ],
   "items": [
+    {
+      "documento": "1319",
+      "envio": "2026-11-19T19:00:52",
+      "anoedicao": "20",
+      "arquivoa4": "2026_11_191319002651",
+      "observacao": "-RELATÓRIO RESUMIDO DA EXECUÇÃO ORÇAMENTÁRIA 5º BIMESTRE 2026.",
+      "title": "RELATÓRIO RESUMIDO DA EXECUÇÃO ORÇAMENTÁRIA 5º BIMESTRE 2026.",
+      "resumo": ""
+    },
     {
       "documento": "1318",
       "envio": "2026-11-19T15:02:46",
@@ -254,5 +264,5 @@
       "title": "DECRETO N. 044.2026 REPUBLICAÇÃO POR INCORREÇÃO - INSTITUI E REGULAMENTA O FUNCIONAMENTO DO CENTRO DE ATENDIMENTO EDUCACIONAL ESPECIALIZADO DE FLORESTA AZUL – CAEE"
     }
   ],
-  "lastChangedAt": "2026-11-19T19:03:19.659Z"
+  "lastChangedAt": "2026-11-20T01:21:10.967Z"
 }
